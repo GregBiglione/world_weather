@@ -27,17 +27,17 @@ class Weather {
   //----------------------- Create Weather from JSON ---------------------------
   //----------------------------------------------------------------------------
 
-  Weather fromDailyJson(dynamic daily) {
-    var cloudiness = daily["clouds"];
-    var weather = daily["weather"][0];
+  static Weather fromJson(dynamic json) {
+    var cloudiness = json["clouds"];
+    var weather = json["weather"][0];
 
     return Weather(
         description: weather["description"].toString(),
-        temperature: daily["temp"]["day"].toDouble(),
-        feelLikeTemperature: daily["feels_like"]["day"].toDouble(),
+        temperature: json["temp"]["day"].toDouble(),
+        feelLikeTemperature: json["feels_like"]["day"].toDouble(),
         cloudiness: cloudiness,
         condition: mapStringToWeatherCondition(weather["main"], cloudiness),
-        date: DateTime.fromMicrosecondsSinceEpoch(daily["dt"] * 1000, isUtc: true)
+        date: DateTime.fromMicrosecondsSinceEpoch(json["dt"] * 1000, isUtc: true)
     );
   }
 
@@ -45,7 +45,7 @@ class Weather {
   //----------------------- Create map string weather condition ----------------
   //----------------------------------------------------------------------------
 
-  WeatherCondition mapStringToWeatherCondition(String input, int cloudiness) {
+  static WeatherCondition mapStringToWeatherCondition(String input, int cloudiness) {
     WeatherCondition condition;
 
     switch(input) {
