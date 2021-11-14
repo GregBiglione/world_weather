@@ -16,7 +16,7 @@ class Forecast {
   //----------------------- Create Forecast from JSON --------------------------
   //----------------------------------------------------------------------------
 
-  Forecast fromJson(dynamic json) {
+  static Forecast fromJson(dynamic json) {
     var weather = json["current"]["weather"][0];
     var date = DateTime.fromMicrosecondsSinceEpoch(json["current"]["dt"] * 1000, isUtc: true);
     var sunrise = DateTime.fromMicrosecondsSinceEpoch(json["current"]["sunrise"] * 1000, isUtc: true);
